@@ -2,8 +2,6 @@ package Controller;
 
 import java.util.List;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import Model.Account;
 import Model.Message;
 import Service.AccountService;
@@ -46,6 +44,10 @@ public class SocialMediaController {
         return app;
     }
 
+    /**
+     * Handles user registration request
+     * @param ctx
+     */
     private void register(Context ctx){
         Account info = ctx.bodyAsClass(Account.class);
         Account createdAccount = accountService.registerUser(info);
@@ -56,6 +58,10 @@ public class SocialMediaController {
         ctx.json(createdAccount);
     }
 
+    /**
+     * Handles user login request
+     * @param ctx
+     */
     private void login(Context ctx){
         Account info = ctx.bodyAsClass(Account.class);
         Account loggedin = accountService.login(info);
@@ -66,6 +72,10 @@ public class SocialMediaController {
         ctx.json(loggedin);
     }
 
+    /**
+     * Handles creating new message request
+     * @param ctx
+     */
     private void createMessage(Context ctx){
         Message m = ctx.bodyAsClass(Message.class);
         Message added = messageService.createMessage(m);
@@ -76,23 +86,39 @@ public class SocialMediaController {
         ctx.json(added);
     }
 
+    /**
+     * Handles getting all message request
+     * @param ctx
+     */
     private void getAllMessages(Context ctx){
         List<Message> list = messageService.getAllMessages();
         ctx.json(list);
     }
 
+    /**
+     * Handles getting a message by Id request
+     * @param ctx
+     */
     private void getMessageById(Context ctx){
         int id = Integer.parseInt(ctx.pathParam("{message_id}"));
         Message found = messageService.getMessageById(id);
         if(found != null){ctx.json(found);}
     }
 
+    /**
+     * Handles deleting a message by Id request
+     * @param ctx
+     */
     private void deleteMessageById(Context ctx){
         int id = Integer.parseInt(ctx.pathParam("{message_id}"));
         Message deleted = messageService.getMessageById(id);
         if(deleted != null){ctx.json(deleted);}
     }
 
+    /**
+     * Handles updating a message request
+     * @param ctx
+     */
     private void updateMessage(Context ctx){
         Message m = ctx.bodyAsClass(Message.class);
         m.setMessage_id(Integer.parseInt(ctx.pathParam("{message_id}")));
@@ -104,6 +130,10 @@ public class SocialMediaController {
         ctx.json(updated);
     }
 
+    /**
+     * Handles getting a message from a certain user request
+     * @param ctx
+    */
     private void getMessagesByUserId(Context ctx){
         int uid = Integer.parseInt(ctx.pathParam("{account_id}"));
         List<Message> messages = messageService.getMessagesByUserId(uid);

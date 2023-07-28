@@ -7,8 +7,17 @@ import java.util.List;
 import Model.Message;
 import Util.ConnectionUtil;
 
+/**
+ * Handles direct access with the Message Table.
+ * Does nothing but access the Message Table.
+ */
 public class MessageDAO {
-    //Helpers
+    /**
+     * Helper function: Translates from Result set to Message
+     * @param rs The ResultSet at the current pointer
+     * @return The Message object extracted from the ResultSet
+     * @throws SQLException, for if an error happens
+     */
     private Message extractObject(ResultSet rs) throws SQLException{
         int id = rs.getInt("message_id");
         int posted_by = rs.getInt("posted_by");
@@ -17,7 +26,10 @@ public class MessageDAO {
         return new Message(id, posted_by, text, time_posted_epoch);
     }
 
-    //Get ALL Message
+    /**
+     * Gets all Messages
+     * @return List of all the messages found
+     */
     public List<Message> getAllMessages(){
         Connection connection = ConnectionUtil.getConnection();
         List<Message> messages = new ArrayList<>();
@@ -34,7 +46,11 @@ public class MessageDAO {
         return messages;
     }
 
-    //Get Message By ID
+    /**
+     * Gets a message based on message_id
+     * @param id the id of the message we are looking for
+     * @return The Message of id
+     */
     public Message getMessageByID(int id){
         Connection connection = ConnectionUtil.getConnection();
         try{
@@ -53,7 +69,11 @@ public class MessageDAO {
         return null;
     }
 
-    //Get ALL Message By AccoundID
+    /**
+     * Gets a message based on a user id or posted_by.
+     * @param posted_by the id of the user.
+     * @return a List of messages by said user
+     */
     public List<Message> getMessageByUser(int posted_by){
         Connection connection = ConnectionUtil.getConnection();
         List<Message> messages = new ArrayList<>();
@@ -73,7 +93,11 @@ public class MessageDAO {
         return messages;
     }
     
-    //Create Message
+    /**
+     * Inserts a new message into the table
+     * @param message The message they wanted to add
+     * @return A copy of the fully inserted message
+     */
     public Message insertMessage(Message message){
         Connection connection = ConnectionUtil.getConnection();
         try{
@@ -98,7 +122,11 @@ public class MessageDAO {
         return null;
     }
 
-    //Update Message By ID
+    /**
+     * Updates an existing message
+     * @param message A Message Object containing the id to update and the new text.
+     * @return Whether or not the update was successful
+     */
     public boolean updateMessage(Message message){
         Connection connection = ConnectionUtil.getConnection();
         try{
@@ -116,7 +144,11 @@ public class MessageDAO {
         }
         return false;
     }
-    //Delete Message By ID
+    /**
+     * Deletes a message based on id
+     * @param id the id of the message to delete
+     * @return Whether or not the deletion is successful
+     */
     public boolean deleteMessage(int id){
         Connection connection = ConnectionUtil.getConnection();
         try{

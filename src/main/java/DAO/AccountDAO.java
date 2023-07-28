@@ -5,7 +5,16 @@ import java.sql.*;
 import Model.Account;
 import Util.ConnectionUtil;
 
+/**
+ * Handles direct access with the Account Table.
+ * Does nothing but access the Account Table.
+ */
 public class AccountDAO {
+    /**
+     * Helper function: Translates from Result set to Account
+     * @param rs The ResultSet at the current pointer
+     * @return The Account object extracted from the ResultSet
+     */
     private Account extractObject(ResultSet rs){
         try{
             if(!rs.next()){return null;}
@@ -20,6 +29,11 @@ public class AccountDAO {
         }
     }
 
+    /**
+     * Gets an Account based on the username
+     * @param username The given username
+     * @return The Account found
+     */
     public Account getAccountByUsername(String username){
         Connection connection = ConnectionUtil.getConnection();
         try{
@@ -37,6 +51,11 @@ public class AccountDAO {
         return null;
     }
     
+    /**
+     * Adds a new Account to the database
+     * @param account The account to be added
+     * @return The successfully added account
+     */
     public Account insertAccount(Account account){
         Connection connection = ConnectionUtil.getConnection();
         try{
