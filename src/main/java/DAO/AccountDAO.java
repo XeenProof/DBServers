@@ -6,7 +6,6 @@ import Model.Account;
 import Util.ConnectionUtil;
 
 public class AccountDAO {
-    //Untested Class
     private Account extractObject(ResultSet rs){
         try{
             if(!rs.next()){return null;}
