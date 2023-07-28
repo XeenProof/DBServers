@@ -29,8 +29,7 @@ public class AccountDAO {
 
             ps.setString(1, username);
 
-            ps.executeQuery();
-            ResultSet rs = ps.getGeneratedKeys();
+            ResultSet rs = ps.executeQuery();
             return extractObject(rs);
         }
         catch(SQLException e){

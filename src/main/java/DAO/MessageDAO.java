@@ -88,7 +88,8 @@ public class MessageDAO {
             ResultSet rs = ps.getGeneratedKeys();
             if(rs.next()){
                 int id = (int)rs.getLong(1);
-                return new Message(id, rs.getInt("posted_by"), rs.getString("message_text"), rs.getLong("time_posted_epoch"));
+                message.setMessage_id(id);
+                return message;
             }
         }
         catch(SQLException e){
@@ -98,14 +99,14 @@ public class MessageDAO {
     }
 
     //Update Message By ID
-    public boolean updateMessage(int id, String message_text){
+    public boolean updateMessage(Message message){
         Connection connection = ConnectionUtil.getConnection();
         try{
-            String sql = "UPDATE Message SET message_text=? WHERE id=?";
+            String sql = "UPDATE Message SET message_text=? WHERE message_id=?";
             PreparedStatement ps = connection.prepareStatement(sql);
 
-            ps.setString(1, message_text);
-            ps.setInt(2, id);
+            ps.setString(1, message.getMessage_text());
+            ps.setInt(2, message.getMessage_id());
 
             int updated = ps.executeUpdate();
             return updated > 0;
