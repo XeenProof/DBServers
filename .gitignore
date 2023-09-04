@@ -7,3 +7,4 @@ restructured_labs/
 .revature/tmp
 .vscode
 .idea/
+src/main/java/Util/ConnectionSecrets.java

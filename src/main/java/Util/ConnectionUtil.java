@@ -19,15 +19,15 @@ public class ConnectionUtil {
     /**
      * url will represent our connection string. Since this is an in-memory db, we will represent a file location to store the data
      */
-    private static String url = "jdbc:h2:./h2/db";
+    private static String url = ConnectionSecrets.url;
     /**
      * Default username for connecting to h2
      */
-    private static String username = "sa";
+    private static String username = ConnectionSecrets.username;
     /**
      * Default password for connecting to h2
      */
-    private static String password = "sa";
+    private static String password = ConnectionSecrets.password;
     /**
      * a static object which represents the connection to h2. Because it is static, any DAO interacting
      * with this connection object is referring to the same object.
@@ -40,9 +40,11 @@ public class ConnectionUtil {
     public static Connection getConnection(){
         if(connection == null){
             try {
-                connection = DriverManager.getConnection(url, username, password);
+                //Class.forName("com.mysql.jdbc.Driver");  
+                connection = DriverManager.getConnection(url,username,password);
+                //connection = DriverManager.getConnection(url, username, password);
                 resetTestDatabase();
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -60,7 +62,7 @@ public class ConnectionUtil {
         }else {
 //            otherwise, recreate the tables without setting up a new connection
             try {
-                FileReader sqlReader = new FileReader("src/main/resources/SocialMedia.sql");
+                FileReader sqlReader = new FileReader("src/main/resources/SocialMediaV2.sql");
                 RunScript.execute(connection, sqlReader);
             } catch (SQLException | FileNotFoundException e) {
                 e.printStackTrace();

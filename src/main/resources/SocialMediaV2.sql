@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS message (
+  c1 INT,
+  c3 VARCHAR(10)
+);
+
