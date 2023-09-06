@@ -4,6 +4,7 @@ import java.util.List;
 
 import Model.Account;
 import Model.Message;
+import Model.UserModels.InputUser;
 import Service.AccountService;
 import Service.MessageService;
 import io.javalin.Javalin;
@@ -41,7 +42,14 @@ public class SocialMediaController {
         app.patch("messages/{message_id}", this::updateMessage);
         app.get("accounts/{account_id}/messages", this::getMessagesByUserId);
 
+        app.post("test", this::test);
+
         return app;
+    }
+
+    private void test(Context ctx){
+        InputUser info = ctx.bodyAsClass(InputUser.class);
+        ctx.json(info.toEncryptedUser().toReturnUser());
     }
 
     /**

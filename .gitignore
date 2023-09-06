@@ -8,3 +8,4 @@ restructured_labs/
 .vscode
 .idea/
 src/main/java/Util/ConnectionSecrets.java
+src/main/java/Model/UserModels/PasswordSecrets.java
