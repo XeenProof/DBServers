@@ -1,4 +1,4 @@
-package Model.UserModels;
+package Util;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

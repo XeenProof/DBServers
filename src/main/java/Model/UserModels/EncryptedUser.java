@@ -1,5 +1,7 @@
 package Model.UserModels;
 
+import Util.PasswordUtils;
+
 public class EncryptedUser extends User{
     private String passwordEncrypted;
 
