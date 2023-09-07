@@ -1,10 +1,10 @@
 package Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Model.Account;
 import Model.Message;
-import Model.UserModels.InputUser;
 import Service.AccountService;
 import Service.MessageService;
 import io.javalin.Javalin;
@@ -15,23 +15,24 @@ import io.javalin.http.Context;
  * found in readme.md as well as the test cases. You should
  * refer to prior mini-project labs and lecture materials for guidance on how a controller may be built.
  */
-public class SocialMediaController {
+public class SocialMediaController implements AbstractController{
     private AccountService accountService;
     private MessageService messageService;
 
+    
 
     public SocialMediaController(){
         accountService = new AccountService();
         messageService = new MessageService();
+
+        
     }
     /**
      * In order for the test cases to work, you will need to write the endpoints in the startAPI() method, as the test
      * suite must receive a Javalin object from this method.
      * @return a Javalin app object which defines the behavior of the Javalin controller.
      */
-    public Javalin startAPI() {
-        Javalin app = Javalin.create();
-
+    public void addRoutes(Javalin app) {
         app.post("register", this::register);
         app.post("login", this::login);
 
@@ -41,15 +42,6 @@ public class SocialMediaController {
         app.delete("messages/{message_id}", this::deleteMessageById);
         app.patch("messages/{message_id}", this::updateMessage);
         app.get("accounts/{account_id}/messages", this::getMessagesByUserId);
-
-        app.post("test", this::test);
-
-        return app;
-    }
-
-    private void test(Context ctx){
-        InputUser info = ctx.bodyAsClass(InputUser.class);
-        ctx.json(info.toEncryptedUser().toReturnUser());
     }
 
     /**

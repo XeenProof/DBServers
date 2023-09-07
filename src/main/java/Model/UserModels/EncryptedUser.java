@@ -17,6 +17,13 @@ public class EncryptedUser extends User{
     }
 
     private String encrypt(String password){
-        return password+"_encrypted";
+        return PasswordUtils.encryptPassword(password);
+    }
+
+    public boolean match(InputUser user){
+        if(!user.getUsername().equals(getUsername())){return false;}
+        if(!user.getEmail().equals(getEmail())){return false;}
+        if(!PasswordUtils.matchPassword(user.getPassword(), passwordEncrypted)){return false;}
+        return true;
     }
 }
