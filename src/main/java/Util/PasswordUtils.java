@@ -3,8 +3,10 @@ package Util;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class PasswordUtils {
+    private static final int salt = PasswordSecrets.saltRounds;
+
     private static BCryptPasswordEncoder encoder(){
-        return new BCryptPasswordEncoder(PasswordSecrets.saltRounds);
+        return new BCryptPasswordEncoder(salt);
     }
 
     public static String encryptPassword(String password){
