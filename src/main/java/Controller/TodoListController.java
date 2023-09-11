@@ -18,6 +18,7 @@ public class TodoListController implements AbstractController{
     public void addRoutes(Javalin app){
         app.post("test", this::test);
         app.post("test2", this::test2);
+        app.get("test3", this::test3);
     }
 
     private void test(Context ctx){
@@ -37,5 +38,8 @@ public class TodoListController implements AbstractController{
             }
         }
         ctx.json(found != null?found:new EncryptedUser());
+    }
+    private void test3(Context ctx){
+        ctx.json(users);
     }
 }
