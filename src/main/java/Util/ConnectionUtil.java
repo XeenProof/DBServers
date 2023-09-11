@@ -62,7 +62,7 @@ public class ConnectionUtil {
         }else {
 //            otherwise, recreate the tables without setting up a new connection
             try {
-                FileReader sqlReader = new FileReader("src/main/resources/SocialMediaV2.sql");
+                FileReader sqlReader = new FileReader("src/main/resources/todoListTables.sql");
                 RunScript.execute(connection, sqlReader);
             } catch (SQLException | FileNotFoundException e) {
                 e.printStackTrace();
