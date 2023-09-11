@@ -24,8 +24,6 @@ public class SocialMediaController implements AbstractController{
     public SocialMediaController(){
         accountService = new AccountService();
         messageService = new MessageService();
-
-        
     }
     /**
      * In order for the test cases to work, you will need to write the endpoints in the startAPI() method, as the test

@@ -5,6 +5,7 @@ import java.util.List;
 
 import Model.UserModels.EncryptedUser;
 import Model.UserModels.InputUser;
+import Util.ConnectionUtil;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
@@ -13,6 +14,7 @@ public class TodoListController implements AbstractController{
 
     public TodoListController(){
         users = new ArrayList<>();
+        ConnectionUtil.getConnection();
     }
 
     public void addRoutes(Javalin app){
